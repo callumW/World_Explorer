@@ -70,20 +70,20 @@ int main()
     guienv->addStaticText(L"!! Text!", core::rect<s32>(10, 10, 260, 44), true);
     scene::ICameraSceneNode* cam = smgr->addCameraSceneNodeFPS();
     if (cam) {
-        cam->setPosition(core::vector3df(0, 0, -40));
-        cam->setTarget(core::vector3df(3, 6, 2));
-        cam->setFarValue(20000);
+        cam->setPosition(core::vector3df(-20.0f, 150.0f, -20.0f));
+        cam->setTarget(core::vector3df(200.0f, -80.0f, 150.0f));
+        cam->setFarValue(200000.0f);
     }
 
     /** add mesh **/
-    Flat_Terrain terrain{25, 25, 10.0, driver};
+    Flat_Terrain terrain{255, 255, 50.0f, driver};
 
     scene::IMeshSceneNode* mesh_node = smgr->addMeshSceneNode(terrain.mesh);
 
     mesh_node->setMaterialFlag(video::EMF_BACK_FACE_CULLING, false);
 
     scene::ILightSceneNode *node = smgr->addLightSceneNode(0,
-        core::vector3df(0,0,-40), video::SColorf(1.0f, 0.6f, 0.7f, 1.0f),
+        core::vector3df(0, 100, 0), video::SColorf(1.0f, 0.6f, 0.7f, 1.0f),
             500.0f);
     if (node)
     {

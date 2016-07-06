@@ -77,7 +77,7 @@ void Flat_Terrain::add_strip(u16 y0, u16 y1, u32 bufNum)
     }
 
     buf->Vertices.set_used((1 + y1 - y0)*width);
-    const f32 z = 1;
+    const f32 z = 1.0f;
     u32 i=0;
     for (u16 y=y0; y<=y1; y++) {
         for (u16 x=0; x < width; x++) {
@@ -87,7 +87,7 @@ void Flat_Terrain::add_strip(u16 y0, u16 y1, u32 bufNum)
 
             video::S3DVertex& v = buf->Vertices[i++];
             v.Pos.set(x, scale*z, y);
-            v.Normal.set(core::vector3df{0, 0, -40});
+            v.Normal.set(core::vector3df{0.0f, 1.0f, 0.0f});
             v.Color = video::SColor{255, 255, 255, 255};
             v.TCoords.set(xx, yy);
         }
