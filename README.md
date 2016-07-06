@@ -12,6 +12,7 @@ Mathematics degree from the [University of Stirling](http://www.stir.ac.uk).
 2. [Installation](###Installation)
 3. [License](###License)
 4. [Contact Info](###Contact Info)
+
 ###Usage
 ###Installation
 ###License
