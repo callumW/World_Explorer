@@ -8,10 +8,10 @@ This application is created for my 4th year honours project: **Procedurally
 Generated 3D Worlds for Video Games** as a part of my Computing Science &
 Mathematics degree from the [University of Stirling](http://www.stir.ac.uk).
 ##Contents
-1. [Usage](###Usage)
-2. [Installation](###Installation)
-3. [License](###License)
-4. [Contact Info](###Contact Info)
+1. [Usage](#usage)
+2. [Installation](#installation)
+3. [License](#license)
+4. [Contact Info](#contact-info)
 
 ###Usage
 ###Installation
