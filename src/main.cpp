@@ -76,14 +76,14 @@ int main()
     }
 
     /** add mesh **/
-    Flat_Terrain terrain{20, 20, 10.0, driver};
+    Flat_Terrain terrain{25, 25, 10.0, driver};
 
     scene::IMeshSceneNode* mesh_node = smgr->addMeshSceneNode(terrain.mesh);
 
     mesh_node->setMaterialFlag(video::EMF_BACK_FACE_CULLING, false);
 
     scene::ILightSceneNode *node = smgr->addLightSceneNode(0,
-        core::vector3df(0,100,0), video::SColorf(1.0f, 0.6f, 0.7f, 1.0f),
+        core::vector3df(0,0,-40), video::SColorf(1.0f, 0.6f, 0.7f, 1.0f),
             500.0f);
     if (node)
     {
