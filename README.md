@@ -19,8 +19,10 @@ Mathematics degree from the [University of Stirling](http://www.stir.ac.uk).
 ###Installation
 
 ###License
-See [LICENSE.md](LICENSE.md).
+This application is licensed under the [MIT]
+(https://opensource.org/licenses/MIT) license. See [LICENSE.md](LICENSE.md).
 
 ###Contact Info
 **author**: Callum Wilson
+
 **email**: callum*dot*w@outlook*dot*com
