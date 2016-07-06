@@ -27,6 +27,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <assert.h>
 #include <driverChoice.h>
 #include "Input_Handler.h"
+#include "Flat_Terrain.h"
 using namespace irr;
 
 constexpr u32 window_width = 1024;
@@ -63,11 +64,31 @@ int main()
 
 
     video::IVideoDriver* driver = device->getVideoDriver();
-    irr::gui::IGUIEnvironment* guienv = device->getGUIEnvironment();
+    gui::IGUIEnvironment* guienv = device->getGUIEnvironment();
     scene::ISceneManager* smgr = device->getSceneManager();
 
     guienv->addStaticText(L"!! Text!", core::rect<s32>(10, 10, 260, 44), true);
-    smgr->addCameraSceneNodeFPS();
+    scene::ICameraSceneNode* cam = smgr->addCameraSceneNodeFPS();
+    if (cam) {
+        cam->setPosition(core::vector3df(0, 0, -40));
+        cam->setTarget(core::vector3df(3, 6, 2));
+        cam->setFarValue(20000);
+    }
+
+    /** add mesh **/
+    Flat_Terrain terrain{20, 20, 10.0, driver};
+
+    scene::IMeshSceneNode* mesh_node = smgr->addMeshSceneNode(terrain.mesh);
+
+    mesh_node->setMaterialFlag(video::EMF_BACK_FACE_CULLING, false);
+
+    scene::ILightSceneNode *node = smgr->addLightSceneNode(0,
+        core::vector3df(0,100,0), video::SColorf(1.0f, 0.6f, 0.7f, 1.0f),
+            500.0f);
+    if (node)
+    {
+        node->getLightData().Attenuation.set(0.f, 1.f/500.f, 0.f);
+    }
 
     device->getCursorControl()->setVisible(false);
 
@@ -79,7 +100,7 @@ int main()
             if (input_handler.is_key_down(KEY_ESCAPE))
                 device->closeDevice();
 
-            driver->beginScene(true, true, video::SColor(255, 255, 255, 255));
+            driver->beginScene(true, true, video::SColor(255, 0, 0, 0));
             smgr->drawAll();
             guienv->drawAll();
             driver->endScene();
@@ -91,6 +112,24 @@ int main()
                 core::stringw str = L"World Explorer -";
                 str += " FPS: ";
                 str += fps;
+                core::vector3df vec = cam->getTarget();
+
+                str += " x: ";
+                str += vec.X;
+                str += " y: ";
+                str += vec.Y;
+                str += " z: ";
+                str += vec.Z;
+
+                core::vector3df pos_vec = cam->getPosition();
+
+                str += " px: ";
+                str += pos_vec.X;
+                str += " py: ";
+                str += pos_vec.Y;
+                str += " pz: ";
+                str += pos_vec.Z;
+
                 device->setWindowCaption(str.c_str());
                 lastFPS = fps;
             }
