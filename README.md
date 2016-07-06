@@ -24,4 +24,4 @@ This application is licensed under the [MIT]
 
 ###Contact Info
 **author**: Callum Wilson  
-**email**: callum *dot* w@outlook *dot* com
+**email**: callum.w@outlook.com
