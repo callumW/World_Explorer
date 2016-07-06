@@ -36,11 +36,12 @@ bool Input_Handler::OnEvent(const SEvent& event)
     return false;   //The event may need to be used by something else
 }
 
-bool Input_Handler::is_key_down(EKEY_CODE key_code) const
+inline bool Input_Handler::is_key_down(EKEY_CODE key_code) const
 {
     return key_states[key_code];
 }
 
 Input_Handler::Input_Handler()
 {
+    
 }

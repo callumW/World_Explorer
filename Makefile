@@ -17,7 +17,7 @@ ifeq ($(SYSTEM),Linux)
 	SUF=.out
 	MKDIR=mkdir -p
 	LINKS=
-	INCS=-I/usr/include/irrlicht
+	INCS= -I/usr/include/irrlicht
 	RM=rm -r -f
 endif
 
@@ -29,16 +29,25 @@ FLAGS +=-DNDEBUG
 endif
 
 LINK += -lIrrlicht
-TARGET=world_explorer
+TARGET=world_explorer$(SUF)
 SRC=$(wildcard src/*.cpp)
 OBS=$(SRC:.cpp=.o)
 
 
-all:
-	$(warning Building $(TARGET))
-	$(warning sources: $(SRC))
-	$(CC) $(FLAGS) $(INCS) $(SRC) -o $(TARGET)$(SUF) $(LINK)
+all: | notify $(OBS)
+	$(info Building application: $(TARGET))
+	$(info )
+	$(CC) $(OBS) -o $(TARGET) $(LINK)
+
+.cpp.o: $(SRC)
+	$(info --- Building object file: $@ ---)
+	$(info )
+	$(CC) $(FLAGS) $(INCS) -c $< -o $@
+
+notify:
+	$(info --- Building for: $(SYSTEM) ---)
+	$(info )
 
 clean:
 	$(warning cleaning...)
-	$(RM) *.o $(TARGET)$(SUF)
+	$(RM) src/*.o $(TARGET)

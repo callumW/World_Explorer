@@ -28,23 +28,22 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include <irrlicht.h>
 #include <array>
-using namespace irr;
 
-class Input_Handler : public IEventReceiver {
+class Input_Handler : public irr::IEventReceiver {
 public:
     /**
      * Called when an input event occurs
      * \param event The event that has occurred
      * \return true if the event has been completely handled, false otherwise
      */
-    virtual bool OnEvent(const SEvent& event);
+    virtual bool OnEvent(const irr::SEvent& event);
 
     /**
      * Check whether the specified key is down
      * \param key_code The key code of the key to check
      * \return true if the key is down, false otherwise
      */
-    virtual bool is_key_down(EKEY_CODE key_code) const;
+    virtual bool is_key_down(irr::EKEY_CODE key_code) const;
 
     /**
      * Constructor
@@ -52,7 +51,7 @@ public:
     Input_Handler();
 
 private:
-    std::array<bool,KEY_KEY_CODES_COUNT> key_states{};    /**< Array of all the
+    std::array<bool,irr::KEY_KEY_CODES_COUNT> key_states{};    /**< Array of all the
                                                                 key states */
 
 };
