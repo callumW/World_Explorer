@@ -12,11 +12,10 @@ Mathematics degree from the [University of Stirling](http://www.stir.ac.uk).
 2. [Installation](#installation)
 3. [License](#license)
 4. [Contact Info](#contact-info)
-
 ###Usage
 ###Installation
 ###License
 See [LICENSE.md](LICENSE.md).
 ###Contact Info
-**author**: Callum Wilson
+**author**: Callum Wilson 
 **email**: callum*dot*w@outlook*dot*com
