@@ -24,6 +24,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 #include "irrlicht.h"
 #include "Flat_Terrain.h"
+#include <assert.h>
+#include <iostream>
 using namespace irr;
 
 Flat_Terrain::Flat_Terrain(u16 t_width, u16 t_height, f32 t_scale,
@@ -76,8 +78,10 @@ void Flat_Terrain::add_strip(u16 y0, u16 y1, u32 bufNum)
         buf->drop();
     }
 
+    assert(buf != 0);
+
     buf->Vertices.set_used((1 + y1 - y0)*width);
-    const f32 z = 1.0f;
+    const f32 z = 0.0f;
     u32 i=0;
     for (u16 y=y0; y<=y1; y++) {
         for (u16 x=0; x < width; x++) {
@@ -86,27 +90,28 @@ void Flat_Terrain::add_strip(u16 y0, u16 y1, u32 bufNum)
             const f32 yy = (f32)x/(f32)height;
 
             video::S3DVertex& v = buf->Vertices[i++];
-            v.Pos.set(x, scale*z, y);
-            v.Normal.set(core::vector3df{0.0f, 1.0f, 0.0f});
-            v.Color = video::SColor{255, 255, 255, 255};
-            v.TCoords.set(xx, yy);
-        }
 
-        buf->Indices.set_used(6*(width - 1)*(y1-y0));
-        i=0;
-        for(u16 y = y0; y < y1; y++)
+            v.Pos = core::vector3df{x, scale*z, y};
+            v.Normal = core::vector3df{0, 1, 0}.normalize();
+            v.Color = video::SColor{255, 255, 255, 255};
+            v.TCoords = core::vector2df{xx, yy};
+        }
+    }
+
+    buf->Indices.set_used(6*(width - 1)*(y1-y0));
+    i=0;
+    for(u16 y = y0; y < y1; y++)
+    {
+        for(u16 x = 0; x < width - 1; x++)
         {
-            for(u16 x = 0; x < width - 1; x++)
-            {
-                const u16 n = (y-y0) * width + x;
-                buf->Indices[i]=n;
-                buf->Indices[++i]=n + width;
-                buf->Indices[++i]=n + width + 1;
-                buf->Indices[++i]=n + width + 1;
-                buf->Indices[++i]=n + 1;
-                buf->Indices[++i]=n;
-                i++;
-            }
+            const u16 n = (y-y0) * width + x;
+            buf->Indices[i]=n;
+            buf->Indices[++i]=n + width;
+            buf->Indices[++i]=n + width + 1;
+            buf->Indices[++i]=n + width + 1;
+            buf->Indices[++i]=n + 1;
+            buf->Indices[++i]=n;
+            ++i;
         }
     }
 

@@ -76,19 +76,33 @@ int main()
     }
 
     /** add mesh **/
-    Flat_Terrain terrain{255, 255, 50.0f, driver};
+    Flat_Terrain terrain{256, 256, 50.0f, driver};
 
     scene::IMeshSceneNode* mesh_node = smgr->addMeshSceneNode(terrain.mesh);
+    //scene::IMeshSceneNode* mesh_node2 = smgr->addMeshSceneNode(terrain.mesh,
+    //    NULL, -1, core::vector3df{255, 0, 255});
+    //mesh_node2->setMaterialFlag(video::EMF_BACK_FACE_CULLING, false);
+
+
 
     mesh_node->setMaterialFlag(video::EMF_BACK_FACE_CULLING, false);
 
     scene::ILightSceneNode *node = smgr->addLightSceneNode(0,
         core::vector3df(0, 100, 0), video::SColorf(1.0f, 0.6f, 0.7f, 1.0f),
             500.0f);
+            /*
     if (node)
     {
         node->getLightData().Attenuation.set(0.f, 1.f/500.f, 0.f);
-    }
+        scene::ISceneNodeAnimator* anim = smgr->createFlyCircleAnimator(
+            core::vector3df{0, 150, 0}, 250.0f);
+
+        if (anim) {
+            node ->addAnimator(anim);
+            anim->drop();
+        }
+
+    }*/
 
     device->getCursorControl()->setVisible(false);
 

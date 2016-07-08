@@ -48,7 +48,7 @@ private:
     irr::u16 width;  /**< width of the terrain */
     irr::u16 height; /**< height of the terrain */
     irr::f32 scale;  /**< scale of the terrain */
-
+    const irr::core::vector3df norm{0, 1, 0};
     /**
      * Add a strip between y0, and y1
      */
