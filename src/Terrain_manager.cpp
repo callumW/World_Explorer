@@ -54,7 +54,7 @@ Terrain_manager::Terrain_manager(irr::scene::ISceneManager* smgr, int w, int h,
                 terrain.mesh,
                 NULL,
                 -1,
-                irr::core::vector3df{x*255, 0, y*255},
+                irr::core::vector3df{x*256, 0, y*256},
                 irr::core::vector3df{0, 0, 0}));
 
             if (mesh_nodes[y*width_patches + x] != NULL) {
@@ -62,6 +62,8 @@ Terrain_manager::Terrain_manager(irr::scene::ISceneManager* smgr, int w, int h,
                     irr::video::EMF_BACK_FACE_CULLING, true);
                 mesh_nodes[y*width_patches + x]->setMaterialFlag(
                     irr::video::EMF_WIREFRAME, true);
+                    mesh_nodes[y*width_patches + x]->setMaterialFlag(
+                        irr::video::EMF_LIGHTING, false);
             }
             else {
                 mesh_nodes.pop_back();

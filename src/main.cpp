@@ -29,6 +29,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "Input_Handler.h"
 #include "Flat_Terrain.h"
 #include "Terrain_manager.h"
+#include "Terrain_generator.h"
 using namespace irr;
 
 constexpr u32 window_width = 1024;
@@ -48,7 +49,7 @@ int main()
     u32 bit_depth = 32;
     bool fullscreen = false;
     bool stencilbuffer = false;
-    bool vsync = false;
+    bool vsync = true;
 
     Input_Handler input_handler;
 
@@ -71,17 +72,17 @@ int main()
     guienv->addStaticText(L"!! Text!", core::rect<s32>(10, 10, 260, 44), true);
     scene::ICameraSceneNode* cam = smgr->addCameraSceneNodeFPS();
     if (cam) {
-        cam->setPosition(core::vector3df(-20.0f, 150.0f, -20.0f));
+        cam->setPosition(core::vector3df(-20.0f, 10.0f, -20.0f));
         cam->setTarget(core::vector3df(200.0f, -80.0f, 150.0f));
         cam->setFarValue(200000.0f);
     }
 
     /** add mesh **/
-    Terrain_manager t_manager{smgr, 768, 768, flat_terrain, driver};
-
-    scene::ILightSceneNode *node = smgr->addLightSceneNode(0,
-        core::vector3df(0, 100, 0), video::SColorf(1.0f, 0.6f, 0.7f, 1.0f),
-            500.0f);
+    //Terrain_manager t_manager{smgr, 768, 768, flat_terrain, driver};
+    Terrain_generator t_generator{1, 1, smgr, driver};
+    /*scene::ILightSceneNode *node = smgr->addLightSceneNode(0,
+        core::vector3df(256, 200, 156), video::SColorf(1.0f, 0.6f, 0.7f, 1.0f),
+            500.0f);*/
             /*
     if (node)
     {
@@ -106,7 +107,7 @@ int main()
             if (input_handler.is_key_down(KEY_ESCAPE))
                 device->closeDevice();
 
-            driver->beginScene(true, true, video::SColor(255, 0, 0, 0));
+            driver->beginScene(true, true, video::SColor(255, 255, 0, 128));
             smgr->drawAll();
             guienv->drawAll();
             driver->endScene();
