@@ -28,6 +28,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <driverChoice.h>
 #include "Input_Handler.h"
 #include "Flat_Terrain.h"
+#include "Terrain_manager.h"
 using namespace irr;
 
 constexpr u32 window_width = 1024;
@@ -47,7 +48,7 @@ int main()
     u32 bit_depth = 32;
     bool fullscreen = false;
     bool stencilbuffer = false;
-    bool vsync = true;
+    bool vsync = false;
 
     Input_Handler input_handler;
 
@@ -76,16 +77,7 @@ int main()
     }
 
     /** add mesh **/
-    Flat_Terrain terrain{256, 256, 50.0f, driver};
-
-    scene::IMeshSceneNode* mesh_node = smgr->addMeshSceneNode(terrain.mesh);
-    //scene::IMeshSceneNode* mesh_node2 = smgr->addMeshSceneNode(terrain.mesh,
-    //    NULL, -1, core::vector3df{255, 0, 255});
-    //mesh_node2->setMaterialFlag(video::EMF_BACK_FACE_CULLING, false);
-
-
-
-    mesh_node->setMaterialFlag(video::EMF_BACK_FACE_CULLING, false);
+    Terrain_manager t_manager{smgr, 768, 768, flat_terrain, driver};
 
     scene::ILightSceneNode *node = smgr->addLightSceneNode(0,
         core::vector3df(0, 100, 0), video::SColorf(1.0f, 0.6f, 0.7f, 1.0f),
