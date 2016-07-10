@@ -15,7 +15,11 @@ Terrain_generator::Terrain_generator(int w, int h, irr::scene::ISceneManager*
                 -1,
                 irr::core::vector3df{x*512.0f, 0.0f, y*512.0f},
                 irr::core::vector3df{0, 0, 0},
-                irr::core::vector3df{1.0f, 0.2f, 1.0f}));
+                irr::core::vector3df{1.0f, 0.3f, 1.0f}));
+            /*terrains.push_back(smgr->addTerrainMesh(
+                "mesh.mesh",
+                d->createImageFromFile("Color_Map.bmp"),
+                d->createImageFromFile("Map.bmp")));*/
             if (terrains[y*width + x] == NULL)
                 terrains.pop_back();
             else {
