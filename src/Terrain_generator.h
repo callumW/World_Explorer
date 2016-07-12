@@ -33,6 +33,8 @@ public:
     Terrain_generator(int w, int h, irr::scene::ISceneManager* smgr,
         irr::video::IVideoDriver* d);
 
+    ~Terrain_generator();
+
 private:
     int width;
     int height;

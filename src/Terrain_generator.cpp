@@ -21,7 +21,7 @@ Terrain_generator::Terrain_generator(int w, int h, irr::scene::ISceneManager*
             "height_color.vert", "vertexMain", irr::video::EVST_VS_1_1,
             "height_color.frag", "pixelMain", irr::video::EPST_PS_1_1,
             mc, irr::video::EMT_SOLID, 0, shading_language);
-    
+
     for (int y=0; y<height; y++) {
         for (int x=0; x<width; x++) {
             terrains.push_back(smgr->addTerrainSceneNode(
@@ -30,7 +30,7 @@ Terrain_generator::Terrain_generator(int w, int h, irr::scene::ISceneManager*
                 -1,
                 irr::core::vector3df{x*512.0f, 0.0f, y*512.0f},
                 irr::core::vector3df{0, 0, 0},
-                irr::core::vector3df{10.0f, 3.0f, 10.0f}));
+                irr::core::vector3df{0.125f, 0.0375, 0.125f}));
             /*terrains.push_back(smgr->addTerrainMesh(
                 "mesh.mesh",
                 d->createImageFromFile("Color_Map.bmp"),
@@ -42,6 +42,7 @@ Terrain_generator::Terrain_generator(int w, int h, irr::scene::ISceneManager*
                     irr::video::EMF_WIREFRAME, true);*/
                 terrains[y*width + x]->setMaterialFlag(
                     irr::video::EMF_LIGHTING, false);
+
                 if (!shaders) {
                     terrains[y*width + x]->setMaterialTexture(0,
                         d->getTexture("Color_Map.bmp"));
@@ -52,5 +53,12 @@ Terrain_generator::Terrain_generator(int w, int h, irr::scene::ISceneManager*
                 }
             }
         }
+    }
+}
+
+Terrain_generator::~Terrain_generator()
+{
+    for (irr::scene::ITerrainSceneNode* node : terrains) {
+        node->drop();
     }
 }
