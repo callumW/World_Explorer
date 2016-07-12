@@ -37,13 +37,6 @@ constexpr u32 window_height = 768;
 
 int main()
 {
-    /* Ask user to pick a graphics driver */
-    video::E_DRIVER_TYPE driver_type = driverChoiceConsole();
-    if (driver_type == video::EDT_COUNT) {
-        std::cout << "Failed to get driver" << std::endl;
-        return 1;
-    }
-
     /** Window Variables **/
     core::dimension2d<u32> window_size{window_width, window_height};
     u32 bit_depth = 32;
@@ -54,7 +47,7 @@ int main()
     Input_Handler input_handler;
 
     /** setup window **/
-    IrrlichtDevice *device = createDevice(driver_type, window_size,
+    IrrlichtDevice *device = createDevice(video::EDT_OPENGL, window_size,
         bit_depth, fullscreen, stencilbuffer, vsync, &input_handler);
 
     if (!device) {
