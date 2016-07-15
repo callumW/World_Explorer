@@ -27,7 +27,7 @@ endif
 ifeq ($(SYSTEM),Linux)
 	SUF=.out
 	MKDIR=mkdir -p
-	LINKS= -lIrrlicht
+	LINK= -lIrrlicht
 	INCS= -I/usr/include/irrlicht
 	RM=rm -r -f
 endif

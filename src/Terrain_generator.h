@@ -40,5 +40,7 @@ private:
     int height;
     bool shaders = false;
     std::vector<irr::scene::ITerrainSceneNode*> terrains;
+
+    
 };
 #endif
