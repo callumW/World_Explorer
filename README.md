@@ -1,3 +1,4 @@
+#WARNING - No Longer Under Development
 #Welcome to World Explorer
 World explorer is a small 3D application, using the [Irrlicht Engine]
 (http://irrlicht.sourceforge.net/), that shows how my procedural generation
